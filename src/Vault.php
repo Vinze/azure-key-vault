@@ -97,6 +97,33 @@ class Vault
     }
 
     /**
+     * Returns the first 25 secrets and a nextlink variable to retrieve the next 25
+     * @throws AzureKeyVaultException
+     */
+    public function listSecrets(string $nextLink = null)
+    {
+        if ( ! $nextLink) {
+            $nextLink = $this->vaultUrl() . "secrets";
+        }
+        $response = Http::withToken($this->authToken())
+            ->accept('application/json')
+            ->get(
+                $nextLink,
+                [
+                    "api-version" => "7.1"
+                ]
+            );
+        if ($response->successful()) {
+            return $response->json();
+        } else {
+            throw new AzureKeyVaultException(
+                $response->json()['error']['message'],
+                $response->status()
+            );
+        }
+    }
+
+    /**
      * Set a secret using the given value
      * @throws AzureKeyVaultException
      */
