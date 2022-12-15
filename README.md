@@ -10,7 +10,7 @@ with an interface similar to `env()` and `config()`.
 
 Require this package with composer:
 ```
-composer require insites-consulting/azure-key-vault
+composer require vinze/azure-key-vault
 ```
 
 The package should be discovered by Laravel on installation.
@@ -24,7 +24,7 @@ configuration is used:
  - `AZURE_AD_CLIENT_SECRET` the shared secret for that service principal.
 - `AZURE_AD_TENANT_ID` the UUID for the tenant under which that service
   principal exists.
- - `AZURE_KEY_VAULT_NAME` the name of the key vault 
+ - `AZURE_KEY_VAULT_NAME` the name of the key vault
    (used as a subdomain in its hostname; e.g. `fred` in
    `fred.vault.azure.net`).
 
@@ -41,7 +41,7 @@ The configuration entries are as follows:
 
 ## Usage
 This package provides a facade called `Vault`, with three methods
-`Vault::secret()`, `Vault::setSecret()` and `Vault::setVault()`, as well as a 
+`Vault::secret()`, `Vault::setSecret()` and `Vault::setVault()`, as well as a
 global helper function `secret()`.
 
 To fetch a secret called 'apikey':
@@ -70,8 +70,8 @@ To set a secret called 'apikey' to the value 'longsecretvalue':
 Vault::setSecret('apikey', 'longsecretvalue');
 ```
 
-This method is void, but will throw an 
-`InsitesConsulting\AzureKeyVault\AzureKeyVaultException` on error, in the same 
+This method is void, but will throw an
+`InsitesConsulting\AzureKeyVault\AzureKeyVaultException` on error, in the same
 manner as `Vault::secret()`.
 
 In order to work with multiple vaults, use `Vault::setVault()` to change the
